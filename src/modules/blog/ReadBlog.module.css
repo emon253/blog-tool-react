@@ -1,0 +1,23 @@
+.content {
+  width: 65%;
+  transition: box-shadow 0.3s;
+}
+.categories {
+  width: 30%;
+  position: fixed;
+  right: 0;
+  margin-right: 4%;
+}
+
+.content:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+@media only screen and (max-width: 600px) {
+  .content {
+    width: 100%;
+    transition: box-shadow 0.3s;
+  }
+  .categories {
+    display: none;
+  }
+}

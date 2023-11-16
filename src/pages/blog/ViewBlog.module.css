@@ -1,0 +1,23 @@
+.blogPage {
+  display: flex;
+}
+.blogs {
+  width: 70%;
+}
+.categories {
+  width: 30%;
+  position: fixed;
+  right: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .blogPage {
+    margin-top: 0%;
+  }
+  .blogs {
+    width: 100%;
+  }
+  .categories {
+    display: none;
+  }
+}
