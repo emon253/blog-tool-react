@@ -1,23 +1,70 @@
+
+
+/* Styles for form and categories */
 .blogPage {
+  margin-top: 10px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
 .blogs {
   width: 70%;
 }
+
 .categories {
-  width: 30%;
-  position: fixed;
-  right: 0;
+  width: 25%;   
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  overflow: auto;
 }
 
-@media only screen and (max-width: 600px) {
+.categories h3 {
+  margin-bottom: 10px;
+}
+
+/* Form styles */
+.text-center {
+  text-align: center;
+}
+
+.blogSearchForm {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.blogSearchForm .form-control {
+  width: 70%;
+}
+
+.blogSearchForm .btn {
+  width: 25%;
+}
+
+/* Responsive styles for form */
+@media (max-width: 768px) {
   .blogPage {
-    margin-top: 0%;
+    flex-direction: column;
+    align-items: center;
   }
+
   .blogs {
     width: 100%;
   }
+
   .categories {
-    display: none;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .blogSearchForm .form-control {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .blogSearchForm .btn {
+    width: 100%;
   }
 }

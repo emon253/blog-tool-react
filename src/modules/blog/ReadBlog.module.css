@@ -1,23 +1,78 @@
-.content {
-  width: 65%;
-  transition: box-shadow 0.3s;
-}
-.categories {
-  width: 30%;
-  position: fixed;
-  right: 0;
-  margin-right: 4%;
+/* ReadBlog.module.css */
+
+.container {
+  margin-top: 20px;
+  display: flex;
 }
 
-.content:hover {
-  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+.content {
+  flex: 1;
 }
-@media only screen and (max-width: 600px) {
-  .content {
-    width: 100%;
-    transition: box-shadow 0.3s;
+
+.commentSection {
+  margin-left: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comment {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.commentUser {
+  font-style: italic;
+  color: #888;
+}
+
+.commentForm {
+  margin-top: 20px;
+}
+
+.commentForm textarea {
+  width: calc(100% - 20px);
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  resize: vertical;
+}
+
+.commentForm button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.commentForm button:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
   }
-  .categories {
-    display: none;
+
+  .commentSection {
+    margin-top: 20px;
+    height: auto;
+    max-height: 300px; /* Set a maximum height for the comment section on smaller screens */
+    overflow-y: auto;
+  }
+
+  .commentForm textarea {
+    width: calc(100% - 10px); /* Adjust textarea width for smaller screens */
   }
 }

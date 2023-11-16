@@ -3,14 +3,3 @@ body {
   padding: 0;
   background-color: rgb(13, 57, 96);
 }
-.base{
-  /* margin-top: 2%; */
-}
-@media only screen and (max-width: 600px) {
-  .base{
-    /* margin-top: 20%; */
-  }
-  .smdNone {
-    display: none;
-  }
-}
