@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Container,
@@ -7,14 +8,25 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AuthService from "../../services/AuthService";
 
 function Navigationbar() {
+  const [username, setUsername] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    setIsLoggedIn(AuthService.isLoggedIn());
+    if (isLoggedIn) {
+      setUsername(AuthService.getUserNameFromToken());
+      console.log(username);
+    }
+  }, []);
+
   return (
     <div>
       {/* Top Navbar */}
-      <Navbar bg="primary" variant="dark" >
+      <Navbar bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand   href="#home" className="text-light ">
+          <Navbar.Brand href="#home" className="text-light ">
             CARBARN-BOGS
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="top-navbar-nav" />
@@ -45,8 +57,6 @@ function Navigationbar() {
             {/* Add more links or components here */}
           </Nav>
           {/* Search Form */}
-         
-         
         </Container>
       </Navbar>
     </div>

@@ -9,6 +9,7 @@ import axios from "axios";
 import style from "./ViewBlog.module.css";
 import ViewCategories from "../category/ViewCategories";
 import CreateBlog from "../../modules/blog/CreateBlog";
+import { Helmet } from "react-helmet";
 const PostCard = React.lazy(() => import("../../components/card/PostCard"));
 
 export default function ViewBlog() {
@@ -33,6 +34,14 @@ export default function ViewBlog() {
 
   return (
     <Container>
+      <Helmet>
+        <title>View All Blogs - Your Website Name</title>
+        <meta
+          name="description"
+          content="Explore our collection of blogs on various topics."
+        />
+        {/* Add other meta tags as needed */}
+      </Helmet>
       <div className={style.blogPage}>
         <div className={style.categories}>
           <h3>Categories</h3>

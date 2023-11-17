@@ -19,7 +19,11 @@
     border-radius: 3px;
     border: 1px solid #ccc;
 }
-
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px; /* Adjust spacing */
+  }
 .btn {
     width: 100%;
     padding: 8px;

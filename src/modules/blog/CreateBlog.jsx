@@ -7,7 +7,11 @@ export default function CreateBlog() {
   const [showModal, setShowModal] = useState(false);
   const [editorContent, setEditorContent] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [metaTitle, setMetaTitle] = useState("");
+  const [metaDescription, setMetaDescription] = useState("");
+  const [permalink, setPermalink] = useState("");
+  const [imageAltText, setImageAltText] = useState("");
 
   const handleInputClick = () => {
     setShowModal(true);
@@ -18,8 +22,9 @@ export default function CreateBlog() {
   };
 
   const handleCreateBlog = () => {
-    // Logic to handle creating a blog post with editorContent, selectedCategory, and selectedImage
-    setShowModal(false); // Close the modal after creating the post
+
+    setShowModal(false); 
+    
   };
 
   return (
@@ -58,12 +63,45 @@ export default function CreateBlog() {
                 <option value="Travel">Travel</option>
                 {/* Add more category options */}
               </Form.Control>
+              <Form.Text className="text-muted">
+                Can't find your category? <a href="#">Create a new one</a>.
+              </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="blogImage">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="file"
                 onChange={(e) => setSelectedImage(e.target.files[0])}
+              />
+            
+              <Form.Label>Image Alt Text</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter image alt text"
+                value={imageAltText}
+                onChange={(e) => setImageAltText(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="blogMeta">
+              <Form.Label>SEO Information</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter meta title"
+                value={metaTitle}
+                onChange={(e) => setMetaTitle(e.target.value)}
+              />
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Enter meta description"
+                value={metaDescription}
+                onChange={(e) => setMetaDescription(e.target.value)}
+              />
+              <Form.Control
+                type="text"
+                placeholder="Enter permalink/URL"
+                value={permalink}
+                onChange={(e) => setPermalink(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="blogContent">
@@ -89,6 +127,4 @@ export default function CreateBlog() {
       </Modal>
     </>
   );
-
-  
 }
