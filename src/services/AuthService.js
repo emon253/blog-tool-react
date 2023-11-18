@@ -7,7 +7,9 @@ import {
 import { AUTH_TOKEN } from "../constants/Const";
 import { jwtDecode } from "jwt-decode";
 
+
 const AuthService = {
+
   signup: async (userData) => {
     try {
       const response = await axios.post(
@@ -29,6 +31,8 @@ const AuthService = {
       if (response.data.accessToken) {
         // Store the token in localStorage
         AuthService.setAccessToken(response.data.accessToken);
+        console.log(response.data.user);
+        AuthService.setUserName(response.data.user.fullName)
       }
       return response.data;
     } catch (error) {
@@ -58,6 +62,11 @@ const AuthService = {
     }
     return null;
   },
+  setUserName:(username)=>{
+    localStorage.setItem("username", username);
+
+  },
+  
 
   // Function to check if the user is logged in
   isLoggedIn: () => {

@@ -6,6 +6,8 @@ import Login from "../pages/auth/Login";
 import ViewBlog from "../pages/blog/ViewBlog";
 import ReadBlog from "../modules/blog/ReadBlog";
 import ReadABlog from "../pages/blog/ReadABlog";
+import UserDetailsPage from "../modules/user/UserDetails";
+import UserDetails from "../modules/user/UserDetails";
 
 const Routers = () => {
   return (
@@ -14,6 +16,7 @@ const Routers = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/user-info" element={<UserDetails />} />
           <Route path="/about" element={<About />} />
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/public-blogs" element={<ViewBlog />} />

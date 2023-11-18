@@ -1,0 +1,97 @@
+/* src/LandingPage.module.css */
+
+/* Landing page container styles */
+.landingPage {
+  text-align: center;
+  background-color: #f6f6f6;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header styles */
+header {
+  padding: 40px 20px;
+}
+
+header h1 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  color: #640202;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Main content styles */
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.features,
+.subscribe {
+  margin-bottom: 40px;
+}
+
+.features h2,
+.subscribe h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.features ul li {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Subscribe form styles */
+.subscribe form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscribe input[type='email'] {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 250px;
+}
+
+.subscribe button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #6c5ce7;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe button:hover {
+  background-color: #4a37d3;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.8rem;
+}

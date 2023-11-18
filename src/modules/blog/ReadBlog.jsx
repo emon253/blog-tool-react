@@ -27,20 +27,8 @@ export default function ReadBlog() {
       { id: 1, text: "Great post!", user: "User1" },
       { id: 2, text: "Interesting read!", user: "User2" },
       { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
-      { id: 2, text: "Interesting read!", user: "User2" },
+      
+     
     ];
     setComments(dummyComments);
   };

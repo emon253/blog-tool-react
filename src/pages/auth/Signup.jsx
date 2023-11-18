@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Signup.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -17,7 +17,11 @@ export default function Signup() {
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (AuthService.isLoggedIn()) {
+      navigate("/");
+    }
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevUserData) => ({

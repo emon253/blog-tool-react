@@ -1,15 +1,14 @@
-import axiosInstance from "../services/axiosInstance";
+import { BLOG_ENDPOINT } from "../constants/ApiEndPoints";
+import axiosInstance from "./axiosInstance";
 
-const BASE_URL = "localhost:8080"
-export const findAllPosts = () => {
-  return axiosInstance
-    .get('https://fakestoreapi.com/products/')
-    .then((response) => response.data);
-
-
+const BlogService = {
+  createBlog: async (blogPostData) => {
+    try {
+      const response = await axiosInstance.post(`${BLOG_ENDPOINT}`, blogPostData);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
-
-export const createBlogPost = async (blogPost)=>{
-  const response = await axiosInstance.post(BASE_URL + '//api/blogposts');
-  return response;
-}
+export default BlogService;

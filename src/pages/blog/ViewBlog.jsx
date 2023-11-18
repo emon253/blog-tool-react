@@ -4,12 +4,12 @@ import { Modal, Button, Form } from "react-bootstrap";
 
 // import PostCard from "../../components/card/PostCard";
 import { useEffect, useState } from "react";
-import { findAllPosts } from "../../services/blogService";
-import axios from "axios";
 import style from "./ViewBlog.module.css";
 import ViewCategories from "../category/ViewCategories";
 import CreateBlog from "../../modules/blog/CreateBlog";
 import { Helmet } from "react-helmet";
+import AuthService from "../../services/AuthService";
+import axios from "axios";
 const PostCard = React.lazy(() => import("../../components/card/PostCard"));
 
 export default function ViewBlog() {
@@ -22,15 +22,18 @@ export default function ViewBlog() {
     console.log("Searching for:", searchQuery);
   };
 
+  // const getAllPost = async () => {
+  //   const response = await findAllPosts().then((response) => {
+  //     setPosts(response);
+  //   });
+  // };
   useEffect(() => {
-    getAllPost();
-  }, []);
-
-  const getAllPost = async () => {
-    const response = await findAllPosts().then((response) => {
-      setPosts(response);
+    axios.get("https://fakestoreapi.com/products/").then((response) => {
+      // console.log(response.data);
+      setPosts(response.data);
     });
-  };
+    // console.log(posts);
+  }, []);
 
   return (
     <Container>
@@ -48,7 +51,11 @@ export default function ViewBlog() {
           <ViewCategories />
         </div>
         <div className={style.blogs}>
-          <CreateBlog />
+          {AuthService.isLoggedIn() && <CreateBlog />}
+          
+          
+          
+          {/* search blogs */}
           <Form.Group
             className={`text-center ${style.blogSearchForm}`}
             controlId="blogSearch"
@@ -66,9 +73,13 @@ export default function ViewBlog() {
               </Button>
             </div>
           </Form.Group>
-
+          {/* search blogs */}
+        
+         
+          {/* show all posts */}
           <Suspense fallback={<div>Loading...</div>}>
-            {posts.map((post) => (
+            {
+            posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
           </Suspense>

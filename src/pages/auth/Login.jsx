@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -6,12 +6,20 @@ import {
   showSuccessMessage,
 } from "../../components/messages/AlertMessaging";
 import AuthService from "../../services/AuthService";
-
+import { UserContext } from "../../context/UserContext";
+import { spread } from "axios";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  // const { setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    if (AuthService.isLoggedIn()) {
+      navigate("/");
+    }
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,12 +30,15 @@ export default function Login() {
       });
       showSuccessMessage(response.message);
       setErrors({});
+      // setUser(response.user);
       navigate("/");
     } catch (error) {
       console.error("Error creating user:", error);
+      setErrors({});
       if (error.response && error.response.data) {
         setErrors(error.response.data);
-        showErrorMessage("Incorrect username or password");
+        console.log(errors);
+        // showErrorMessage(errors);
       }
     }
   };
@@ -45,6 +56,7 @@ export default function Login() {
             required
           />
           {errors.username && <p className={styles.error}>{errors.username}</p>}
+          {errors.message && <p className={styles.error}>{errors.message}</p>}
         </div>
         <div className={styles.inputGroup}>
           <input

@@ -2,16 +2,22 @@ import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
+import BlogService from "../../services/BlogService";
+import CreateCategory from "../../pages/category/CreateCategory";
 
 export default function CreateBlog() {
   const [showModal, setShowModal] = useState(false);
-  const [editorContent, setEditorContent] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [metaTitle, setMetaTitle] = useState("");
-  const [metaDescription, setMetaDescription] = useState("");
-  const [permalink, setPermalink] = useState("");
-  const [imageAltText, setImageAltText] = useState("");
+  const [showCategoryModal, setCategoryShowModal] = useState(false);
+  const [blogPostData, setBlogPostData] = useState({
+    title: "",
+    category: "",
+    image: "",
+    imageAltText: "",
+    metaTitle: "",
+    metaDescription: "",
+    permalink: "",
+    content: "",
+  });
 
   const handleInputClick = () => {
     setShowModal(true);
@@ -20,13 +26,42 @@ export default function CreateBlog() {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
-  const handleCreateBlog = () => {
-
-    setShowModal(false); 
-    
+  const handleInputClick2 = () => {
+    setCategoryShowModal(true);
   };
 
+  const handleCloseModal2 = () => {
+    setCategoryShowModal(false);
+  };
+
+  const handleCreateBlog = () => {
+    // Save the blogPostData or perform an action with the data
+    console.log("Blog Post Data:", blogPostData);
+    const response = BlogService.createBlog(blogPostData);
+    setShowModal(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBlogPostData({
+      ...blogPostData,
+      [name]: value,
+    });
+  };
+
+  const handleImageChange = (e) => {
+    setBlogPostData({
+      ...blogPostData,
+      image: e.target.files[0],
+    });
+  };
+
+  const handleContentChange = (content) => {
+    setBlogPostData({
+      ...blogPostData,
+      content: content,
+    });
+  };
   return (
     <>
       <div className="pt-2">
@@ -48,14 +83,21 @@ export default function CreateBlog() {
           <Form>
             <Form.Group className="mb-3" controlId="blogTitle">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter title" />
+              <Form.Control
+                type="text"
+                placeholder="Enter title"
+                name="title"
+                value={blogPostData.title}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="blogCategory">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 as="select"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                name="category"
+                value={blogPostData.category}
+                onChange={handleInputChange}
               >
                 <option value="">Select category</option>
                 {/* Add options for categories */}
@@ -64,22 +106,45 @@ export default function CreateBlog() {
                 {/* Add more category options */}
               </Form.Control>
               <Form.Text className="text-muted">
-                Can't find your category? <a href="#">Create a new one</a>.
+                Can't find your category?{" "}
+                <a onClick={handleInputClick2} href="#">
+                  Create a new one
+                </a>
+                .
               </Form.Text>
             </Form.Group>
+
+            <Modal
+              show={showCategoryModal}
+              onHide={() => setCategoryShowModal(false)}
+              centered
+              size="md"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Add New Category</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <CreateCategory />
+              </Modal.Body>
+              
+            </Modal>
+
             <Form.Group className="mb-3" controlId="blogImage">
               <Form.Label>Image</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 type="file"
-                onChange={(e) => setSelectedImage(e.target.files[0])}
-              />
-            
+                name="image"
+                value={blogPostData.image}
+                onChange={handleInputChange}
+              /> */}
+
               <Form.Label>Image Alt Text</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter image alt text"
-                value={imageAltText}
-                onChange={(e) => setImageAltText(e.target.value)}
+                name="imageAltText"
+                value={blogPostData.imageAltText}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="blogMeta">
@@ -87,29 +152,33 @@ export default function CreateBlog() {
               <Form.Control
                 type="text"
                 placeholder="Enter meta title"
-                value={metaTitle}
-                onChange={(e) => setMetaTitle(e.target.value)}
+                name="metaTitle"
+                value={blogPostData.metaTitle}
+                onChange={handleInputChange}
               />
               <Form.Control
                 as="textarea"
                 rows={3}
                 placeholder="Enter meta description"
-                value={metaDescription}
-                onChange={(e) => setMetaDescription(e.target.value)}
+                name="metaDescription"
+                value={blogPostData.metaDescription}
+                onChange={handleInputChange}
               />
               <Form.Control
                 type="text"
                 placeholder="Enter permalink/URL"
-                value={permalink}
-                onChange={(e) => setPermalink(e.target.value)}
+                name="permalink"
+                value={blogPostData.permalink}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="blogContent">
               <Form.Label>Content</Form.Label>
               {/* Rich text editor */}
               <ReactQuill
-                value={editorContent}
-                onChange={setEditorContent}
+                name="content"
+                value={blogPostData.content}
+                onChange={handleContentChange}
                 style={{ height: "300px" }} // Adjust height as needed
                 modules={{ toolbar: true }}
               />
